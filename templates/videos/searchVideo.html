@@ -1,0 +1,33 @@
+{% extends 'videos/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container mb-5">
+        <h1>Search subtitle</h1>
+        <div class="row justify-content-center">
+            <div class="container">
+                <div class="row">
+                    <div class="card shadow-sm">
+                        <video width="520" height="240" controls>
+                            <source src="{{ video.s3_file }}">
+                        </video>
+                        <div class="card-body">
+                            <p class="card-text">{{ video.id }} - {{ video.title }}</p>
+                            <p class="card-text">{{ video.date_posted }}</p>
+                            <p class="card-text">VideoS3 - <a href="{{ video.s3_file }}">Download File</a></p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <form method="post" class="form-group my-2 my-lg-6">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <input class="btn btn-primary" type="submit" value="Search">
+                </form>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}
