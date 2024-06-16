@@ -31,6 +31,9 @@ def process_subtitle(subtitle_file_path, video_id):
             for subtitle in subtitles:
                 subtitle_string += ' ' + subtitle.strip()
             store_subtitle(video_id=video_id, timestamp=time, subtitle=subtitle_string)
+        video_obj = Video.objects.get(id=video_id)
+        video_obj.is_subtitle_processed = True
+        video_obj.save()
 
 
 def upload_video(request):
